@@ -21,12 +21,22 @@ document.querySelector(".js-scissors-button").addEventListener("click", () => {
   updateScoreElement();
 });
 
+let intervalId; 
+
 document.querySelector(".auto-play-button").addEventListener("click", () => {
-  setInterval(function() {
-    autoplayGame();
-    updateScoreElement();
-  }, 1000);
+  if (!intervalId) {
+    intervalId = setInterval(function() {
+      autoplayGame();
+      updateScoreElement();
+    }, 1000);
+  }
 });
+
+document.querySelector(".stop-auto-play-button").addEventListener("click", () => {
+  clearInterval(intervalId);
+  intervalId = null; 
+});
+
 /*
   Add an event listener
   if the user presses the key r => play rock
